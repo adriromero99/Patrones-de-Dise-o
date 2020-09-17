@@ -15,4 +15,10 @@ Consignas
 
 Respuestas:
 ===========
+- Existen muchas clases de Empanadero y Panadero lo que viola el principio de programar contra interfaces y no contra implementaciones, esto puede solucionarse si se utiliza el 
+patron Strategy y se crean estrategias (interfaces) que encapsulen el comportamiento deseado.
+- Es posible utilizar el patron Double Dispatch entre la persona que come un producto y el producto que es comido, esto permite crear clases que encapsulan el comportamiento 
+esperado cuando una persona come determinado tipo (para celiacos, para hipertensos, normal) de producto.
+- La Persona tiene demasiadas responsabilidades lo cual viola el principio de responsabilidad única. Para resolver esto se crearon más clases con parte del comportamiento de 
+la clase Persona
 
