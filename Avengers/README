@@ -1,1 +1,8 @@
+Consignas
+=========
+- Identifique potenciales problemas de diseño en el código. Enumérelos en una hoja y justifique por qué considera que representan un problema de diseño.
+- ¿Se viola algún principio de diseño? ¿Cuál(es)?
+- Realice una mejora de diseño total del proyecto que además incluya:
+    * Iron Man deberá poder robarle las gemas del infinito a Thanos cuadriplicando él también su poder de ataque pero provocándole una muerte inmediata.
+- Puede modificar todo el código (de la solución y de las pruebas), agregando y/o quitando todas las clases que considere apropiadas, justificando cada decisión.
 
