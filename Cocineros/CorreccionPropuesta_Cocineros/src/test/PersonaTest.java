@@ -1,46 +1,54 @@
 package test;
-import org.junit.Assert;
 
+
+import Clasificaciones.Celiaco;
+import Clasificaciones.Comun;
+import Clasificaciones.Hipertenso;
 import comensales.Persona;
-import especialistas.Empanadero;
-import especialistas.EmpanaderoCeliaco;
-import especialistas.Panadero;
-import especialistas.PanaderoCeliaco;
+import especialistas.Cocinero;
+import especialistas.Panaderia.EstrategiaPanaderoComun;
+import especialistas.Panaderia.PanaderoCeliacoEstrategia;
+import especialistas.Panaderia.PanaderoMasterchefEstrategia;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class PersonaTest {
 
-	@org.junit.Test
+	@Test
 	public void personaNoCeliacaComeCosasParaNoCeliacosEstaTodoBien() {
 		
-		Persona personaNoCeliaca = new Persona(false);
-		Assert.assertEquals(personaNoCeliaca.getCalorias(),0);
+		Persona personaNoCeliaca = new Persona(new Comun());
 		
-		Panadero panadero = new Panadero();
-		String pan = panadero.hacerPan();
-		personaNoCeliaca.comer(pan);
-		Assert.assertEquals(personaNoCeliaca.calorias,10);
-		
-		Empanadero empandero = new Empanadero();
-		String empanada = empandero.hacerEmpanada();
-		personaNoCeliaca.comer(empanada);
-		Assert.assertEquals(personaNoCeliaca.calorias,25);
+		Cocinero panadero = new Cocinero();
+		panadero.setEstrategiaPanadera(new EstrategiaPanaderoComun());
+		personaNoCeliaca.comer(panadero.cocinarPanComun());
+		assertEquals(personaNoCeliaca.getCalorias(),10);
 	}
 	
-	@org.junit.Test
+	@Test
 	public void personaCeliacaComeCosasParaCeliacosEstaTodoBien() {
 		
-		Persona celiaco = new Persona(true);
-		Assert.assertEquals(celiaco.calorias,0);
+		Persona celiaco = new Persona(new Celiaco());
 		
-		PanaderoCeliaco panaderoCeliaco = new PanaderoCeliaco();
-		String pan = panaderoCeliaco.hacerPan();
-		celiaco.comer(pan);
-		Assert.assertEquals(celiaco.calorias,10);
-		
-		EmpanaderoCeliaco empanderoCeliaco = new EmpanaderoCeliaco();
-		String empanada = empanderoCeliaco.hacerEmpanada();
-		celiaco.comer(empanada);
-		Assert.assertEquals(celiaco.calorias,25);
+		Cocinero panaderoCeliaco = new Cocinero();
+		panaderoCeliaco.setEstrategiaPanadera(new PanaderoCeliacoEstrategia());
+		celiaco.comer(panaderoCeliaco.cocinarPanCeliaco());
+		assertEquals(celiaco.getCalorias(),10);
+
+	}
+
+	@Test
+	public void personaCeliacaComeCosasdassParaCeliacosEstaTodoBien() {
+
+		Persona hipertenso = new Persona(new Hipertenso());
+
+		Cocinero cocinero = new Cocinero();
+		cocinero.setEstrategiaPanadera(new PanaderoMasterchefEstrategia());
+		hipertenso.comer(cocinero.cocinarPanHipertenso());
+		assertEquals(hipertenso.getCalorias(),9);
+
 	}
 
 }

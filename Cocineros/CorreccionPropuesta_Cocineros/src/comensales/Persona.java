@@ -1,69 +1,28 @@
 package comensales;
 
+import Clasificaciones.Clasificacion;
+import Comida.Comida;
+
 public class Persona {
 	
-	public int calorias;
-	boolean celiaca;
-	
-	public Persona(boolean celiaca){
+	private int calorias;
+	private Clasificacion clasificacion;
+
+	public Persona(Clasificacion clasificacion){
 		this.calorias = 0;
-		this.celiaca = celiaca;
+		this.clasificacion = clasificacion;
 	}
 
-	public void comer(String algo){
-		
-		/************************************************
-		 * PAN
-		 ************************************************/
-		if (algo.contains("pan")) {
-			
-			if (algo.contains("gluten")){
-				
-				if (this.celiaca){
-					//Esta todo bien
-					this.calorias += 10;
-				}else{
-					// Esta todo bien tambien, 
-					// no soy celiaca, pero comer pan celiaco no pasa nada
-					this.calorias += 10;
-				}
-			}else{
-				
-				if (this.celiaca){
-					//DANGER !!!! Soy celiaca y como pan comun !!!!
-					System.out.println("ERROR: celiaca come pan comun");
-				}else{
-					this.calorias += 10;
-				}
-			}
-		}
-		
-		
-		/************************************************
-		 * EMPANADA
-		 ************************************************/
-		if (algo.contains("EMPANADA")){
-			
-			if (algo.contains("gluten")){
-				
-				if (this.celiaca){
-					//Esta todo bien
-					this.calorias += 15;
-				}else{
-					// Esta todo bien tambien, 
-					// no soy celiaca, pero comer empanada celiaca no pasa nada
-					this.calorias += 15;
-				}
-			}else{
-				
-				if (this.celiaca){
-					//DANGER !!!! Soy celiaca y como empanada comun !!!!
-					System.out.println("ERROR: celiaca come empanada comun");
-				}else{
-					this.calorias += 15;
-				}
-				
-			}
-		}
+	public void comer(Comida comida) {
+		clasificacion.comer(comida);
+		this.aumentarCalorias(comida.calcularCalorias());
+	}
+
+	private void aumentarCalorias(int calorias){
+		this.calorias += calorias;
+	}
+
+	public int getCalorias(){
+		return this.calorias;
 	}
 }
